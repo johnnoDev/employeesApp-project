@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Eliminar empleado (VBF){% endblock %}
+{% block content %}
+<h1 class="mb-4">Eliminar empleado <small class="text-muted">(VBF)</small></h1>
+<p>¿Está seguro de que desea eliminar a <strong>{{ empleado.nombres }} {{ empleado.apellidos }}</strong>?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'fbv:empleado_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
