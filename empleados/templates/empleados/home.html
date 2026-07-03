@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 {% block title %}Inicio{% endblock %}
 {% block content %}
-<h1 class="mb-4">Gestión de Empleados y Cargos</h1>
-<p class="text-muted">CRUD implementado con Vistas Basadas en Funciones (VBF) y Vistas Basadas en Clases (VBC).</p>
+<div class="p-4 p-md-5 mb-4 rounded-3" style="background: linear-gradient(120deg, #10233d, #1e4fc4);">
+    <h1 class="text-white mb-2">Gestión de Empleados y Cargos</h1>
+    <p class="text-white-50 mb-0">CRUD implementado con Vistas Basadas en Funciones (VBF) y Vistas Basadas en Clases (VBC).</p>
+</div>
 
-<div class="row g-4 mt-2">
+<div class="row g-4">
     <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">Vistas Basadas en Funciones (VBF)</div>
+        <div class="card h-100 border-top border-4" style="border-top-color: var(--brand-primary) !important;">
             <div class="card-body">
-                <a href="{% url 'fbv:cargo_list' %}" class="btn btn-outline-primary w-100 mb-2">Cargos</a>
+                <h5 class="card-title">Vistas Basadas en Funciones (VBF)</h5>
+                <p class="card-text text-muted small">Operaciones implementadas con funciones de vista tradicionales.</p>
+                <a href="{% url 'fbv:cargo_list' %}" class="btn btn-primary w-100 mb-2">Cargos</a>
                 <a href="{% url 'fbv:empleado_list' %}" class="btn btn-outline-primary w-100">Empleados</a>
             </div>
         </div>
     </div>
     <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">Vistas Basadas en Clases (VBC)</div>
+        <div class="card h-100 border-top border-4" style="border-top-color: var(--brand-teal) !important;">
             <div class="card-body">
-                <a href="{% url 'cbv:cargo_list' %}" class="btn btn-outline-success w-100 mb-2">Cargos</a>
+                <h5 class="card-title">Vistas Basadas en Clases (VBC)</h5>
+                <p class="card-text text-muted small">Las mismas operaciones usando vistas genéricas de Django.</p>
+                <a href="{% url 'cbv:cargo_list' %}" class="btn btn-success w-100 mb-2">Cargos</a>
                 <a href="{% url 'cbv:empleado_list' %}" class="btn btn-outline-success w-100">Empleados</a>
             </div>
         </div>
