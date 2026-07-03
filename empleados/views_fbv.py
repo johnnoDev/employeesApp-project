@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import CargoForm, EmpleadoForm
@@ -7,11 +8,13 @@ from .models import Cargo, Empleado
 
 # --- Cargo ---
 
+@login_required
 def cargo_list(request):
     cargos = Cargo.objects.all()
     return render(request, 'empleados/fbv/cargo_list.html', {'cargos': cargos})
 
 
+@login_required
 def cargo_create(request):
     if request.method == 'POST':
         form = CargoForm(request.POST)
@@ -24,6 +27,7 @@ def cargo_create(request):
     return render(request, 'empleados/fbv/cargo_form.html', {'form': form, 'titulo': 'Registrar cargo'})
 
 
+@login_required
 def cargo_update(request, pk):
     cargo = get_object_or_404(Cargo, pk=pk)
     if request.method == 'POST':
@@ -37,6 +41,7 @@ def cargo_update(request, pk):
     return render(request, 'empleados/fbv/cargo_form.html', {'form': form, 'titulo': 'Editar cargo'})
 
 
+@login_required
 def cargo_delete(request, pk):
     cargo = get_object_or_404(Cargo, pk=pk)
     if request.method == 'POST':
@@ -48,11 +53,13 @@ def cargo_delete(request, pk):
 
 # --- Empleado ---
 
+@login_required
 def empleado_list(request):
     empleados = Empleado.objects.select_related('cargo').all()
     return render(request, 'empleados/fbv/empleado_list.html', {'empleados': empleados})
 
 
+@login_required
 def empleado_create(request):
     if request.method == 'POST':
         form = EmpleadoForm(request.POST)
@@ -65,6 +72,7 @@ def empleado_create(request):
     return render(request, 'empleados/fbv/empleado_form.html', {'form': form, 'titulo': 'Registrar empleado'})
 
 
+@login_required
 def empleado_update(request, pk):
     empleado = get_object_or_404(Empleado, pk=pk)
     if request.method == 'POST':
@@ -78,6 +86,7 @@ def empleado_update(request, pk):
     return render(request, 'empleados/fbv/empleado_form.html', {'form': form, 'titulo': 'Editar empleado'})
 
 
+@login_required
 def empleado_delete(request, pk):
     empleado = get_object_or_404(Empleado, pk=pk)
     if request.method == 'POST':

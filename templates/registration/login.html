@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Iniciar sesión{% endblock %}
+{% block content %}
+<h1 class="mb-4">Iniciar sesión</h1>
+<form method="post" class="col-md-6">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-3">
+        <label class="form-label">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}<div class="text-danger small">{{ field.errors }}</div>{% endif %}
+    </div>
+    {% endfor %}
+    {% if form.non_field_errors %}
+    <div class="text-danger small mb-3">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit" class="btn btn-primary">Ingresar</button>
+    <a href="{% url 'empleados:signup' %}" class="btn btn-outline-secondary">Crear cuenta</a>
+</form>
+{% endblock %}

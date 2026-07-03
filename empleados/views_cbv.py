@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
@@ -9,13 +10,13 @@ from .models import Cargo, Empleado
 
 # --- Cargo ---
 
-class CargoListView(ListView):
+class CargoListView(LoginRequiredMixin, ListView):
     model = Cargo
     template_name = 'empleados/cbv/cargo_list.html'
     context_object_name = 'cargos'
 
 
-class CargoCreateView(SuccessMessageMixin, CreateView):
+class CargoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Cargo
     form_class = CargoForm
     template_name = 'empleados/cbv/cargo_form.html'
@@ -24,7 +25,7 @@ class CargoCreateView(SuccessMessageMixin, CreateView):
     extra_context = {'titulo': 'Registrar cargo'}
 
 
-class CargoUpdateView(SuccessMessageMixin, UpdateView):
+class CargoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Cargo
     form_class = CargoForm
     template_name = 'empleados/cbv/cargo_form.html'
@@ -33,7 +34,7 @@ class CargoUpdateView(SuccessMessageMixin, UpdateView):
     extra_context = {'titulo': 'Editar cargo'}
 
 
-class CargoDeleteView(DeleteView):
+class CargoDeleteView(LoginRequiredMixin, DeleteView):
     model = Cargo
     template_name = 'empleados/cbv/cargo_confirm_delete.html'
     success_url = reverse_lazy('cbv:cargo_list')
@@ -45,14 +46,14 @@ class CargoDeleteView(DeleteView):
 
 # --- Empleado ---
 
-class EmpleadoListView(ListView):
+class EmpleadoListView(LoginRequiredMixin, ListView):
     model = Empleado
     template_name = 'empleados/cbv/empleado_list.html'
     context_object_name = 'empleados'
     queryset = Empleado.objects.select_related('cargo').all()
 
 
-class EmpleadoCreateView(SuccessMessageMixin, CreateView):
+class EmpleadoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Empleado
     form_class = EmpleadoForm
     template_name = 'empleados/cbv/empleado_form.html'
@@ -61,7 +62,7 @@ class EmpleadoCreateView(SuccessMessageMixin, CreateView):
     extra_context = {'titulo': 'Registrar empleado'}
 
 
-class EmpleadoUpdateView(SuccessMessageMixin, UpdateView):
+class EmpleadoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Empleado
     form_class = EmpleadoForm
     template_name = 'empleados/cbv/empleado_form.html'
@@ -70,7 +71,7 @@ class EmpleadoUpdateView(SuccessMessageMixin, UpdateView):
     extra_context = {'titulo': 'Editar empleado'}
 
 
-class EmpleadoDeleteView(DeleteView):
+class EmpleadoDeleteView(LoginRequiredMixin, DeleteView):
     model = Empleado
     template_name = 'empleados/cbv/empleado_confirm_delete.html'
     success_url = reverse_lazy('cbv:empleado_list')

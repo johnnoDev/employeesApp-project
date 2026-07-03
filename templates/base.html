@@ -22,6 +22,20 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'cbv:cargo_list' %}">Cargos</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'cbv:empleado_list' %}">Empleados</a></li>
                 </ul>
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><span class="nav-link disabled">Hola, {{ user.username }}</span></li>
+                        <li class="nav-item">
+                            <form method="post" action="{% url 'empleados:logout' %}" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link nav-link">Cerrar sesión</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'empleados:login' %}">Iniciar sesión</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'empleados:signup' %}">Crear cuenta</a></li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </nav>
